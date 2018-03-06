@@ -1,0 +1,27 @@
+{
+    "GLOBAL" : {
+
+    },
+
+    "DASHBOARD": {
+      "SEE_MORE": "Ver máis"
+    },
+
+    "LOGIN":{
+      "ACCESS": "Acceder",
+      "USERNAME": "Usuario",
+      "PASSWORD": "Contrasinal",
+      "USERNAME_REQUIRED": "Usuario requerido",
+      "PASSWORD_REQUIRED": "Contrasinal requerido",
+      "SIGN_IN": "Iniciar sesión",
+      "PLEASE_TYPE_USER_PASSWORD" : "Por favor, introduza usuario e contrasinal",
+      "STARTING_SESSION" : "Iniciando sesión...",
+      "USER_NOT_EXISTS" : "O usuario non existe ou as credenciais son incorrectas.",
+      "CONNECTION_ERROR" : "Error de conexión. Revise a súa conexión a internet",
+      "WRONG_CREDENTIALS": "Credenciais incorrectas"
+    },
+
+    "ALERT": {
+
+    }
+}

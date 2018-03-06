@@ -1,0 +1,17 @@
+
+<div class="card simple-question-content" [ngClass]="{'question-active': currentIndex == index, 'question-inactive':currentIndex != index}">
+ <div class="card-block">
+   <span class="question-number">{{index+1}}</span>
+   <p class="card-text">{{question.question['gl']}}</p>
+   <div class="row">
+    <div class = "col-sm-6" *ngFor="let answer of question.answers; let i = index;">
+      <label style="float:left;width:90%" for="symptom" >{{answer.text['gl']}}</label>
+      <button style="float:left;width:10%" #answerChecks class="btn btn-outline-info form-control btn-answer" (click)="setValue(answer.value)"
+              [ngClass]="{'btn-active': isOptionChecked(answer), 'btn-inactive':isOptionChecked(answer)}">
+        <i *ngIf="isOptionChecked(answer)" class="fa fa-check" aria-hidden="true"></i>
+        <span *ngIf="!isOptionChecked(answer)">&nbsp;</span>
+      </button>
+    </div>
+   </div>
+ </div>
+</div>

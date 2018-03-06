@@ -1,0 +1,17 @@
+<div class="card simple-question-content" [ngClass]="{'question-active': currentIndex == index, 'question-inactive':currentIndex != index}">
+ <div class="card-block">
+   <span class="question-number">{{index+1}}</span>
+   <p class="card-text">{{question.question['gl']}}</p>
+    <p>
+     <button #answerChecks class="btn btn-outline-info btn-answer" (click)="setValue(1)"
+             [ngClass]="survey && question && {'btn-active': survey[question['field']] == 1, 'btn-inactive':survey[ question['field']] != 1}">
+             Sí
+    </button>
+     <button #answerChecks class="btn btn-outline-info btn-answer" (click)="setValue(2)"
+             [ngClass]="survey && question && {'btn-active': survey[question['field']] == 2, 'btn-inactive':survey[ question['field']] != 2}">
+            Non
+     </button>
+   </p> 
+   <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+ </div>
+</div>

@@ -1,0 +1,90 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:con="https://www2.agenciatributaria.gob.es/static_files/common/internet/dep/aplicaciones/es/aeat/ssii/fact/ws/ConsultaLR.xsd"
+ xmlns:sum="https://www2.agenciatributaria.gob.es/static_files/common/internet/dep/aplicaciones/es/aeat/ssii/fact/ws/SuministroInformacion.xsd">
+	<soapenv:Header/>
+	<soapenv:Body>
+		<con:ConsultaLRFacturasRecibidas>
+			<sum:Cabecera>
+				<sum:IDVersionSii>{{ cabecera.idVersion }}</sum:IDVersionSii>
+				<sum:Titular>
+					<sum:NombreRazon>{{ cabecera.titular.nombreRazon }}</sum:NombreRazon>
+					<sum:NIF>{{ cabecera.titular.nif }}</sum:NIF>
+				</sum:Titular>
+			</sum:Cabecera>
+			<con:FiltroConsulta>
+				<sum:PeriodoImpositivo>
+					<sum:Ejercicio>{{ filtroConsulta.periodoImpositivo.ejercicio }}</sum:Ejercicio>
+					<sum:Periodo>{{ filtroConsulta.periodoImpositivo.periodo }}</sum:Periodo>
+				</sum:PeriodoImpositivo>
+				{{#if filtroConsulta.idFactura}}
+				<!--Optional:-->
+				<con:IDFactura>
+					{{#if filtroConsulta.idFactura.idEmisor}}
+					<!--Optional:-->
+					<sum:IDEmisorFactura>
+						<sum:NombreRazon>{{ filtroConsulta.idFactura.iDEmisorFactura.nombreRazon }}</sum:NombreRazon>
+						<!--You have a CHOICE of the next 2 items at this level-->
+						{{#if filtroConsulta.idFactura.iDEmisorFactura.nif}}
+						<sum:NIF>{{ filtroConsulta.idFactura.iDEmisorFactura.nif }}</sum:NIF>
+						{{/if}}{{#ifNot filtroConsulta.idFactura.iDEmisorFactura.nif}}
+						<sum:IDOtro>
+							{{#if filtroConsulta.idFactura.iDEmisorFactura.idOtro.codigoPais}}
+							<!--Optional:-->
+							<sum:CodigoPais>{{ filtroConsulta.idFactura.iDEmisorFactura.idOtro.codigoPais }}</sum:CodigoPais>
+							{{/if}}
+							<sum:IDType>{{ filtroConsulta.idFactura.iDEmisorFactura.idOtro.idType }}</sum:IDType>
+							<sum:ID>{{ filtroConsulta.idFactura.iDEmisorFactura.idOtro.id }}</sum:ID>
+						</sum:IDOtro>
+						{{/ifNot}}
+					</sum:IDEmisorFactura>
+					{{/if}}{{#if filtroConsulta.idFactura.numSerieFacturaEmisor}}
+					<!--Optional:-->
+					<sum:NumSerieFacturaEmisor>{{ filtroConsulta.idFactura.numSerieFacturaEmisor }}</sum:NumSerieFacturaEmisor>
+					{{/if}}{{#if filtroConsulta.idFactura.fechaExpedicionFacturaEmisor}}
+					<!--Optional:-->
+					<sum:FechaExpedicionFacturaEmisor>{{ filtroConsulta.idFactura.fechaExpedicionFacturaEmisor }}</sum:FechaExpedicionFacturaEmisor>
+					{{/if}}
+				</con:IDFactura>
+				{{/if}}{{#if filtroConsulta.fechaPresentacion}}
+				<!--Optional:-->
+				<con:FechaPresentacion>
+					{{#if filtroConsulta.fechaPresentacion.desde}}
+					<!--Optional:-->
+					<sum:Desde>{{ filtroConsulta.fechaPresentacion.desde }}</sum:Desde>
+					{{/if}}{{#if filtroConsulta.fechaPresentacion.hasta}}
+					<!--Optional:-->
+					<sum:Hasta>{{ filtroConsulta.fechaPresentacion.hasta }}</sum:Hasta>
+					{{/if}}
+				</con:FechaPresentacion>
+				{{/if}}{{#if filtroConsulta.facturaModificada}}
+				<!--Optional:-->
+				<con:FacturaModificada>{{ filtroConsulta.facturaModificada }}</con:FacturaModificada>
+				{{/if}}{{#if filtroConsulta.estadoCuadre}}
+				<!--Optional:-->
+				<con:EstadoCuadre>{{ filtroConsulta.estadoCuadre }}</con:EstadoCuadre>
+				{{/if}}{{#if filtroConsulta.clavePaginacion}}
+				<!--Optional:-->
+				<con:ClavePaginacion>
+					<sum:IDEmisorFactura>
+						<sum:NombreRazon>{{ filtroConsulta.clavePaginacion.idEmisorFactura.nombreRazon }}</sum:NombreRazon>
+						<!--You have a CHOICE of the next 2 items at this level-->
+						{{#if filtroConsulta.clavePaginacion.idEmisorFactura.nif}}
+						<sum:NIF>{{ filtroConsulta.clavePaginacion.idEmisorFactura.nif }}</sum:NIF>
+						{{/if}}{{#ifNot filtroConsulta.clavePaginacion.idEmisorFactura.nif}}
+						<sum:IDOtro>
+							{{#if filtroConsulta.clavePaginacion.idEmisorFactura.idOtro.codigoPais}}
+							<!--Optional:-->
+							<sum:CodigoPais>{{ filtroConsulta.clavePaginacion.idEmisorFactura.idOtro.codigoPais }}</sum:CodigoPais>
+							{{/if}}
+							<sum:IDType>{{ filtroConsulta.clavePaginacion.idEmisorFactura.idOtro.idType }}</sum:IDType>
+							<sum:ID>{{ filtroConsulta.clavePaginacion.idEmisorFactura.idOtro.id }}</sum:ID>
+						</sum:IDOtro>
+						{{/ifNot}}
+					</sum:IDEmisorFactura>
+					<sum:NumSerieFacturaEmisor>{{ filtroConsulta.clavePaginacion.numSerieFacturaEmisor }}</sum:NumSerieFacturaEmisor>
+					<sum:FechaExpedicionFacturaEmisor>{{ filtroConsulta.clavePaginacion.fechaExpedicionFacturaEmisor }}</sum:FechaExpedicionFacturaEmisor>
+				</con:ClavePaginacion>
+				{{/if}}
+			</con:FiltroConsulta>
+		</con:ConsultaLRFacturasRecibidas>
+	</soapenv:Body>
+</soapenv:Envelope>

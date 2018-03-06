@@ -1,0 +1,41 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:con="https://www2.agenciatributaria.gob.es/static_files/common/internet/dep/aplicaciones/es/aeat/ssii/fact/ws/ConsultaLR.xsd"
+ xmlns:sum="https://www2.agenciatributaria.gob.es/static_files/common/internet/dep/aplicaciones/es/aeat/ssii/fact/ws/SuministroInformacion.xsd">
+	<soapenv:Header/>
+	<soapenv:Body>
+		<con:ConsultaPagos>
+			<sum:Cabecera>
+				<sum:IDVersionSii>{{ cabecera.idVersion }}</sum:IDVersionSii>
+				<sum:Titular>
+					<sum:NombreRazon>{{ cabecera.titular.nombreRazon }}</sum:NombreRazon>
+					<sum:NIF>{{ cabecera.titular.nif }}</sum:NIF>
+				</sum:Titular>
+			</sum:Cabecera>
+			<con:FiltroConsultaPagos>
+				<con:IDFactura>
+					<sum:IDEmisorFactura>
+						<sum:NombreRazon>{{ filtro.idFactura.idEmisorFactura.nombreRazon }}</sum:NombreRazon>
+						<!--You have a CHOICE of the next 2 items at this level-->
+						{{#if filtro.idFactura.idEmisorFactura.nif}}
+						<sum:NIF>{{ filtro.idFactura.idEmisorFactura.nif }}</sum:NIF>
+						{{/if}}{{#ifNot filtro.idFactura.idEmisorFactura.nif}}
+						<sum:IDOtro>
+							{{#if filtro.idFactura.idEmisorFactura.idOtro.codigoPais}}
+							<!--Optional:-->
+							<sum:CodigoPais>{{ filtro.idFactura.idEmisorFactura.idOtro.codigoPais }}</sum:CodigoPais>
+							{{/if}}
+							<sum:IDType>{{ filtro.idFactura.idEmisorFactura.idOtro.idType }}</sum:IDType>
+							<sum:ID>{{ filtro.idFactura.idEmisorFactura.idOtro.id }}</sum:ID>
+						</sum:IDOtro>
+						{{/ifNot}}
+					</sum:IDEmisorFactura>
+					<sum:NumSerieFacturaEmisor>{{ filtro.idFactura.numSerieFacturaEmisor }}</sum:NumSerieFacturaEmisor>
+					<sum:FechaExpedicionFacturaEmisor>{{ filtro.idFactura.fechaExpedicionFacturaEmisor }}</sum:FechaExpedicionFacturaEmisor>
+				</con:IDFactura>
+				{{#if filtro.clavePaginacion}}
+				<!--Optional:-->
+				<con:ClavePaginacion>{{ filtro.clavePaginacion }}</con:ClavePaginacion>
+				{{/if}}
+			</con:FiltroConsultaPagos>
+		</con:ConsultaPagos>
+	</soapenv:Body>
+</soapenv:Envelope>

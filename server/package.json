@@ -1,0 +1,36 @@
+{
+  "name": "sii-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.4.1",
+    "bluebird": "^3.5.0",
+    "body-parser": "^1.17.2",
+    "cors": "^2.8.3",
+    "ejs": "^2.5.6",
+    "express": "^4.15.3",
+    "express-jwt": "^5.3.0",
+    "handlebars": "^4.0.10",
+    "html-pdf": "^2.1.0",
+    "method-override": "^2.3.9",
+    "nodemailer": "^4.0.1",
+    "nodemailer-smtp-transport": "^2.7.4",
+    "officegen": "^0.4.1",
+    "opbeat": "^4.14.0",
+    "pdfmake": "^0.1.31",
+    "pg": "^6.2.4",
+    "phantom-html-to-pdf": "^0.5.4",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1",
+    "winston": "^2.3.1",
+    "xml2js": "^0.4.17",
+    "xmldom": "^0.1.27"
+  }
+}

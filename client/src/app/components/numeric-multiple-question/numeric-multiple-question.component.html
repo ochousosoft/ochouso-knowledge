@@ -1,0 +1,15 @@
+
+<div class="card simple-question-content" [ngClass]="{'question-active': currentIndex == index, 'question-inactive':currentIndex != index}">
+ <div class="card-block">
+   <span class="question-number">{{index+1}}</span>
+   <p class="card-text">{{question.question['gl']}}</p>
+   <div class="row">
+    <div class = "col-sm-6" *ngFor="let answer of question.answers; let i = index;">
+      <label style="float:left;width:75%" for="symptom" >{{answer.text}}</label>
+      <input type="number" [(ngModel)] = "values[answer.value]" (change)="onValueChange($event, answer)" 
+              style="float:left;width:25%" #answerChecks class="form-control btn-answer"
+              [ngClass]="{'input-active': values[answer.value], 'input-inactive':!values[answer.value]}" />
+    </div>
+   </div>
+ </div>
+</div>

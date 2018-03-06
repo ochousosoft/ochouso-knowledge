@@ -1,0 +1,13 @@
+<div class="card simple-question-content" [ngClass]="{'question-active': currentIndex == index, 'question-inactive':currentIndex != index}">
+ <div class="card-block">
+  <span class="question-number">{{index+1}}</span>
+   <p class="card-text">{{question.question['gl']}}</p>
+   <div class="row">
+    <div class = "form-inline col-sm-12">
+      <label style="float:left;width:75%" for="symptom" >{{question.fieldLabel}}</label>
+      <input *ngIf="survey && question" #txtNumber class="form-control" [(ngModel)]="survey[question.field]"
+            [ngClass]="survey && question && {'input-active': survey[question['field']], 'input-inactive':!survey[ question['field']]}" />
+    </div>
+   </div>
+ </div>
+</div>

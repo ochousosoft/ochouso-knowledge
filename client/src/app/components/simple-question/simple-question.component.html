@@ -1,0 +1,41 @@
+<div class="card simple-question-content" [ngClass]="{'question-active': currentIndex == index, 'question-inactive':currentIndex != index}">
+ <div class="card-block">
+   <span class="question-number">{{index+1}}</span>
+   <p class="card-text">{{question.question['gl']}}</p>
+   <!-- <p>
+     <button #answerChecks class="btn btn-outline-info" (click)="setValue()">Sí</button>
+     <button #answerChecks class="btn btn-outline-info" (click)="setValue()">Non</button>
+   </p> -->
+    <div *ngIf="numCols==3" class="row answers-panel">
+      <div class="col-md-3">
+        &nbsp;
+      </div>
+      <button *ngFor="let answer of question.answers; let i = index;"  
+              #answerChecks class="btn btn-outline-info col-md-2 btn-answer" 
+              [ngClass]="survey && question && {'btn-active': survey[question['field']] == answer.value, 'btn-inactive':survey[ question['field']] != answer.value}"
+              (click)="setValue(answer.value)">
+        {{answer.text['gl']}}
+      </button>
+      <div class="col-md-3">
+        &nbsp;
+      </div>
+   </div>
+
+   <div  *ngIf="numCols==4" class="row answers-panel">
+      <div class="col-md-2">
+        &nbsp;
+      </div>
+      <button *ngFor="let answer of question.answers; let i = index;"  
+              #answerChecks class="btn btn-outline-info col-md-2 btn-answer" 
+              [ngClass]="survey && question && {'btn-active': survey[question['field']] == answer.value, 'btn-inactive':survey[ question['field']] != answer.value}"
+              (click)="setValue(answer.value)">
+        {{answer.text['gl']}}
+      </button>
+      <div class="col-md-2">
+        &nbsp;
+      </div>
+   </div>
+
+   <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+ </div>
+</div>

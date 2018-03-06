@@ -1,0 +1,9 @@
+<app-nav *ngIf="Auth.isAuthenticated()"></app-nav>
+
+<div class="container-fluid">
+  <router-outlet></router-outlet>
+  <div class="row">
+    <!-- <app-collapsible-left-sidebar *ngIf="Auth.isAuthenticated()"></app-collapsible-left-sidebar>   -->
+  </div> 
+</div>
+<app-footer></app-footer>

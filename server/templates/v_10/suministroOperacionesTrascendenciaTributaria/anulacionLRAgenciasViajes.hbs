@@ -1,0 +1,48 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sum="https://www2.agenciatributaria.gob.es/static_files/common/internet/dep/aplicaciones/es/aeat/ssii/fact/ws/SuministroLR.xsd"
+ xmlns:sum1="https://www2.agenciatributaria.gob.es/static_files/common/internet/dep/aplicaciones/es/aeat/ssii/fact/ws/SuministroInformacion.xsd">
+	<soapenv:Header/>
+	<soapenv:Body>
+		<sum:BajaLRAgenciasViajes>
+			<sum1:Cabecera>
+				<sum1:IDVersionSii>{{ cabecera.idVersion }}</sum1:IDVersionSii>
+				<sum1:Titular>
+					<sum1:NombreRazon>{{ cabecera.titular.nombreRazon }}</sum1:NombreRazon>
+					{{#if cabecera.titular.nifRepresentante}}
+					<!--Optional:-->
+					<sum1:NIFRepresentante>{{ cabecera.titular.nifRepresentante }}</sum1:NIFRepresentante>
+					{{/if}}
+					<sum1:NIF>{{ cabecera.titular.nif }}</sum1:NIF>
+				</sum1:Titular>
+			</sum1:Cabecera>
+			<!--1 to 10000 repetitions:-->
+			{{#each registroLRBajaAgenciasViajes}}
+			<sum:RegistroLRBajaAgenciasViajes>
+				<sum1:PeriodoImpositivo>
+					<sum1:Ejercicio>{{ this.periodoImpositivo.ejercicio }}</sum1:Ejercicio>
+					<sum1:Periodo>{{ this.periodoImpositivo.periodo }}</sum1:Periodo>
+				</sum1:PeriodoImpositivo>
+				<sum:Contraparte>
+					<sum1:NombreRazon>{{ this.contraparte.nombreRazon }}</sum1:NombreRazon>
+					{{#if this.contraparte.nifRepresentante}}
+					<!--Optional:-->
+					<sum1:NIFRepresentante>{{ this.contraparte.nifRepresentante }}</sum1:NIFRepresentante>
+					{{/if}}
+					<!--You have a CHOICE of the next 2 items at this level-->
+					{{#if this.contraparte.nif}}
+					<sum1:NIF>{{ this.contraparte.nif }}</sum1:NIF>
+					{{/if}}{{#ifNot this.contraparte.nif}}
+					<sum1:IDOtro>
+						{{#if this.contraparte.idOtro.codigoPais}}
+						<!--Optional:-->
+						<sum1:CodigoPais>{{ this.contraparte.idOtro.codigoPais }}</sum1:CodigoPais>
+						{{/if}}
+						<sum1:IDType>{{ this.contraparte.idOtro.idType }}</sum1:IDType>
+						<sum1:ID>{{ this.contraparte.idOtro.id }}</sum1:ID>
+					</sum1:IDOtro>
+					{{/ifNot}}
+				</sum:Contraparte>
+			</sum:RegistroLRBajaAgenciasViajes>
+			{{/each}}
+		</sum:BajaLRAgenciasViajes>
+	</soapenv:Body>
+</soapenv:Envelope>

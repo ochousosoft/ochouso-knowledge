@@ -1,0 +1,28 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" (click)="close()" >&times;</button>
+            <h4 class="modal-title">{{title || 'Confirm'}}</h4>
+        </div>
+        <div class="modal-body">
+            <p>{{message || 'Are you sure?'}}</p>
+            <div class="col-md-12">
+                <label></label>
+                <span class="pull-right">
+                    <a href="#/dashboard" (click)="markAs(true)">Todos</a>
+                    &nbsp;&nbsp;
+                    <a href="#/dashboard" (click)="markAs(false)">Ningún</a>
+                </span>
+                <br>
+                <div class="checkbox" *ngFor="let opt of chartOptions; let i = index;">
+                 <label><input type="checkbox" value="{{i}}" [(ngModel)]="valueOptions[i]">&nbsp;{{opt.name}}</label>
+                </div>
+                <!-- <ss-multiselect-dropdown [options]="defaultOptions" [(ngModel)]="defaultModel" [texts]="myTexts" [settings]="mySettings" (ngModelChange)="onChange($event)"></ss-multiselect-dropdown> -->
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button [disabled]="!atLeastOneSelected()" type="button" class="btn btn-primary" (click)="confirm()">OK</button>
+            <button type="button" class="btn btn-default" (click)="close()" >Cancel</button>
+        </div>
+    </div>
+</div>

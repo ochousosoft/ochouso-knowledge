@@ -1,0 +1,25 @@
+<main style="padding: 0px 15px;" class="col-sm-12 col-md-12 pt-3">
+  <div class="row">
+    <div class="post col-md-3" *ngFor="let post of posts">
+      <div class="card">
+        <div class="card-block">
+          <h4 class="card-title">{{post.title}}</h4>
+          <p class="card-text">
+            {{post.content}}
+          </p>
+          <a href="#" class="btn btn-primary">{{'DASHBOARD.SEE_MORE' | translate}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p>
+    &nbsp;
+  </p>
+  <p>
+    &nbsp;
+  </p>
+  <p>
+    &nbsp;
+  </p>
+</main>

@@ -1,0 +1,55 @@
+<div class="card satisfaction-question-content" 
+    [ngClass]="{'question-active': currentIndex == index, 'question-inactive':currentIndex != index}">
+ <div class="card-block">
+    <span class="question-number">{{index+1}}</span>
+    <p class="satisfaction-question-text">
+    {{question?question.question['gl']:''}}
+    <p>
+    <div class="row">
+        <div class="col-md-4">
+          <button #answerChecks class="btn-answer" (click)="setValue(2)">
+            <img *ngIf="survey && survey[question['field']] != 2" class="satisfaction-icon" src="assets/img/rating-2-inactive.png" >
+            <img *ngIf="survey && survey[question['field']] == 2" class="satisfaction-icon" src="assets/img/rating-2.png" >
+          </button>
+          <p><b>Mal</b></p>
+        </div>
+        <div class="col-md-4">
+          <button #answerChecks class="btn-answer" (click)="setValue(4)">
+            <img *ngIf="survey && survey[question['field']] != 4" class="satisfaction-icon" src="assets/img/rating-4-inactive.png" >
+            <img *ngIf="survey && survey[question['field']] == 4" class="satisfaction-icon" src="assets/img/rating-4.png" >
+          </button>
+          <p><b>Indiferente</b></p>
+        </div>
+        <div class="col-md-4">
+          <button #answerChecks class="btn-answer" (click)="setValue(5)">
+            <img *ngIf="survey && survey[question['field']] != 5" class="satisfaction-icon" src="assets/img/rating-5-inactive.png" >
+            <img *ngIf="survey && survey[question['field']] == 5" class="satisfaction-icon" src="assets/img/rating-5.png" >
+          </button>
+          <p><b>Ben</b></p>
+        </div>
+    </div>
+    <!-- <div class="row">
+      <div class = "col-md-4">
+        <button style="float:left;width:10%" #answerChecks class="btn btn-outline-info form-control btn-satisfaction-answer" (click)="setValue(answer.value)"
+                [ngClass]="{'btn-active': true, 'btn-inactive':false}">
+          <i *ngIf="true" class="fa fa-check" aria-hidden="true"></i>
+          <span *ngIf="true">&nbsp;</span>
+        </button>
+      </div>
+      <div class = "col-md-4">
+        <button style="float:left;width:10%" #answerChecks class="btn btn-outline-info form-control btn-satisfaction-answer" (click)="setValue(answer.value)"
+                [ngClass]="{'btn-active': true, 'btn-inactive':false}">
+          <i *ngIf="true" class="fa fa-check" aria-hidden="true"></i>
+          <span *ngIf="true">&nbsp;</span>
+        </button>
+      </div>
+      <div class = "col-md-4">
+        <button style="float:left;width:10%" #answerChecks class="btn btn-outline-info form-control btn-satisfaction-answer" (click)="setValue(answer.value)"
+                [ngClass]="{'btn-active': true, 'btn-inactive':false}">
+          <i *ngIf="true" class="fa fa-check" aria-hidden="true"></i>
+          <span *ngIf="true">&nbsp;</span>
+        </button>
+      </div>
+    </div> -->
+  </div>
+</div>

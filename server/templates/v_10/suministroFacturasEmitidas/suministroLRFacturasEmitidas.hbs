@@ -1,0 +1,321 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sum="https://www2.agenciatributaria.gob.es/static_files/common/internet/dep/aplicaciones/es/aeat/ssii/fact/ws/SuministroLR.xsd"
+ xmlns:sum1="https://www2.agenciatributaria.gob.es/static_files/common/internet/dep/aplicaciones/es/aeat/ssii/fact/ws/SuministroInformacion.xsd">
+	<soapenv:Header/>
+	<soapenv:Body>
+		<sum:SuministroLRFacturasEmitidas>
+			<sum1:Cabecera>
+				<sum1:IDVersionSii>{{ cabecera.idVersion }}</sum1:IDVersionSii>
+				<sum1:Titular>
+					<sum1:NombreRazon>{{ cabecera.titular.nombreRazon }}</sum1:NombreRazon>
+					{{#if cabecera.titular.nifRepresentante}}
+					<!--Optional:-->
+					<sum1:NIFRepresentante>{{ cabecera.titular.nifRepresentante }}</sum1:NIFRepresentante>
+					{{/if}}
+					<sum1:NIF>{{ cabecera.titular.nif }}</sum1:NIF>
+				</sum1:Titular>
+				<sum1:TipoComunicacion>{{ cabecera.tipoCom }}</sum1:TipoComunicacion>
+			</sum1:Cabecera>
+			<!--1 to 10000 repetitions:-->
+			{{#each registroLRFacturasEmitidas}}
+			<sum:RegistroLRFacturasEmitidas>
+				<sum1:PeriodoImpositivo>
+					<sum1:Ejercicio>{{ this.periodoImpositivo.ejercicio }}</sum1:Ejercicio>
+					<sum1:Periodo>{{ this.periodoImpositivo.periodo }}</sum1:Periodo>
+				</sum1:PeriodoImpositivo>
+				<sum:IDFactura>
+					<sum1:IDEmisorFactura>
+						<sum1:NIF>{{ this.idFactura.idEmisorFactura.nif }}</sum1:NIF>
+					</sum1:IDEmisorFactura>
+					<sum1:NumSerieFacturaEmisor>{{ this.idFactura.numSerieFacturaEmisor }}</sum1:NumSerieFacturaEmisor>
+					{{#if this.idFactura.numSerieFacturaEmisorResumenFin}}
+					<!--Optional:-->
+					<sum1:NumSerieFacturaEmisorResumenFin>{{ this.idFactura.numSerieFacturaEmisorResumenFin }}</sum1:NumSerieFacturaEmisorResumenFin>
+					{{/if}}
+					<sum1:FechaExpedicionFacturaEmisor>{{ this.idFactura.fechaExpedicionFacturaEmisor }}</sum1:FechaExpedicionFacturaEmisor>
+				</sum:IDFactura>
+				<sum:FacturaExpedida>
+					<sum1:TipoFactura>{{ this.facturaExpedida.tipoFactura }}</sum1:TipoFactura>
+					{{#if this.facturaExpedida.tipoRectificativa}}
+					<!--Optional:-->
+					<sum1:TipoRectificativa>{{ this.facturaExpedida.tipoRectificativa }}</sum1:TipoRectificativa>
+					{{/if}} {{#if this.facturaExpedida.facturasAgrupadas}}
+					<!--Optional:-->
+					<sum1:FacturasAgrupadas>
+						<!--1 or more repetitions:-->
+						{{#each this.facturaExpedida.facturasAgrupadas}}
+						<sum1:IDFacturaAgrupada>
+							<sum1:NumSerieFacturaEmisor>{{ this.idFacturaAgrupada.numSerieFacturaEmisor }}</sum1:NumSerieFacturaEmisor>
+							<sum1:FechaExpedicionFacturaEmisor>{{ this.idFacturaAgrupada.fechaExpedicionFacturaEmisor }}</sum1:FechaExpedicionFacturaEmisor>
+						</sum1:IDFacturaAgrupada>
+						{{/each}}
+					</sum1:FacturasAgrupadas>
+					{{/if}} {{#if this.facturaExpedida.facturasRectificadas}}
+					<!--Optional:-->
+					<sum1:FacturasRectificadas>
+						<!--1 or more repetitions:-->
+						{{#each this.facturaExpedida.facturasRectificadas}}
+						<sum1:IDFacturaRectificada>
+							<sum1:NumSerieFacturaEmisor>{{ this.idFacturaRectificada.numSerieFacturaEmisor }}</sum1:NumSerieFacturaEmisor>
+							<sum1:FechaExpedicionFacturaEmisor>{{ this.idFacturaRectificada.fechaExpedicionFacturaEmisor }}</sum1:FechaExpedicionFacturaEmisor>
+						</sum1:IDFacturaRectificada>
+						{{/each}}
+					</sum1:FacturasRectificadas>
+					{{/if}} {{#if this.facturaExpedida.importeRectificacion}}
+					<!--Optional:-->
+					<sum1:ImporteRectificacion>
+						<sum1:BaseRectificada>{{ this.facturaExpedida.importeRect.base }}</sum1:BaseRectificada>
+						<sum1:CuotaRectificada>{{ this.facturaExpedida.importeRect.cuota }}</sum1:CuotaRectificada>
+						{{#if this.facturaExpedida.importeRectificacion.cuotaRecargoRectificado}}
+						<!--Optional:-->
+						<sum1:CuotaRecargoRectificado>{{ this.facturaExpedida.importeRectificacion.cuotaRecargoRectificado }}</sum1:CuotaRecargoRectificado>
+						{{/if}}
+					</sum1:ImporteRectificacion>
+					{{/if}} {{#if this.facturaExpedida.importeRectificacion}}
+					<!--Optional:-->
+					<sum1:FechaOperacion>{{ this.facturaExpedida.fechaOperacion }}</sum1:FechaOperacion>
+					{{/if}}
+					<sum1:ClaveRegimenEspecialOTrascendencia>{{ this.facturaExpedida.claveRegimenEspecialOTrascendencia }}</sum1:ClaveRegimenEspecialOTrascendencia>
+					{{#if this.facturaExpedida.claveRegimenEspecialOTrascendenciaAdicional1}}
+					<!--Optional:-->
+					<sum1:ClaveRegimenEspecialOTrascendenciaAdicional1>{{ this.facturaExpedida.claveRegimenEspecialOTrascendenciaAdicional1 }}</sum1:ClaveRegimenEspecialOTrascendenciaAdicional1>
+					{{/if}} {{#if this.facturaExpedida.claveRegimenEspecialOTrascendenciaAdicional2}}
+					<!--Optional:-->
+					<sum1:ClaveRegimenEspecialOTrascendenciaAdicional2>{{ this.facturaExpedida.claveRegimenEspecialOTrascendenciaAdicional2 }}</sum1:ClaveRegimenEspecialOTrascendenciaAdicional2>
+					{{/if}} {{#if this.facturaExpedida.numRegistroAcuerdoFacturacion}}
+					<!--Optional:-->
+					<sum1:NumRegistroAcuerdoFacturacion>{{ this.facturaExpedida.numRegistroAcuerdoFacturacion }}</sum1:NumRegistroAcuerdoFacturacion>
+					{{/if}} {{#if this.facturaExpedida.importeTotal}}
+					<!--Optional:-->
+					<sum1:ImporteTotal>{{ this.facturaExpedida.importeTotal }}</sum1:ImporteTotal>
+					{{/if}} {{#if this.facturaExpedida.baseImponibleACoste}}
+					<!--Optional:-->
+					<sum1:BaseImponibleACoste>{{ this.facturaExpedida.baseImponibleACoste }}</sum1:BaseImponibleACoste>
+					{{/if}}
+					<sum1:DescripcionOperacion>{{ this.facturaExpedida.descripcionOperacion }}</sum1:DescripcionOperacion>
+					{{#if this.facturaExpedida.datosInmueble}}
+					<!--Optional:-->
+					<sum1:DatosInmueble>
+						<!--1 to 15 repetitions:-->
+						{{#each this.facturaExpedida.datosInmueble}}
+						<sum1:DetalleInmueble>
+							<sum1:SituacionInmueble>{{this.detalleInmueble.situacionInmueble}}</sum1:SituacionInmueble>
+							{{#if this.detInmueble.referencia}}
+							<!--Optional:-->
+							<sum1:ReferenciaCatastral>{{ this.detalleInmueble.referenciaCatastral }}</sum1:ReferenciaCatastral>
+							{{/if}}
+						</sum1:DetalleInmueble>
+						{{/each}}
+					</sum1:DatosInmueble>
+					{{/if}} {{#if this.facturaExpedida.importeTransmisionSujetoAIVA}}
+					<!--Optional:-->
+					<sum1:ImporteTransmisionSujetoAIVA>{{ this.facturaExpedida.importeTransmisionSujetoAIVA }}</sum1:ImporteTransmisionSujetoAIVA>
+					{{/if}} {{#if this.facturaExpedida.emitidaPorTerceros}}
+					<!--Optional:-->
+					<sum1:EmitidaPorTerceros>{{ this.facturaExpedida.emitidaPorTerceros }}</sum1:EmitidaPorTerceros>
+					{{/if}} {{#if this.facturaExpedida.variosDestinatarios}}
+					<!--Optional:-->
+					<sum1:VariosDestinatarios>{{ this.facturaExpedida.variosDestinatarios }}</sum1:VariosDestinatarios>
+					{{/if}} {{#if this.facturaExpedida.cupon}}
+					<!--Optional:-->
+					<sum1:Cupon>{{ this.facturaExpedida.cupon }}</sum1:Cupon>
+					{{/if}} {{#if this.facturaExpedida.contraparte}}
+					<!--Optional:-->
+					<sum1:Contraparte>
+						<sum1:NombreRazon>{{ this.facturaExpedida.contraparte.nombreRazon }}</sum1:NombreRazon>
+						{{#if this.facturaExpedida.contraparte.nifRepresentante}}
+						<!--Optional:-->
+						<sum1:NIFRepresentante>{{ this.facturaExpedida.contraparte.nifRepresentante }}</sum1:NIFRepresentante>
+						{{/if}}
+						<!--You have a CHOICE of the next 2 items at this level-->
+						{{#if this.facturaExpedida.contraparte.nif}}
+						<sum1:NIF>{{ this.facturaExpedida.contraparte.nif }}</sum1:NIF>
+						{{/if}} {{#ifNot this.facturaExpedida.contraparte.nif}}
+						<sum1:IDOtro>
+							{{#if this.facturaExpedida.contraparte.idOtro.codigoPais}}
+							<!--Optional:-->
+							<sum1:CodigoPais>{{ this.facturaExpedida.contraparte.idOtro.codigoPais }}</sum1:CodigoPais>
+							{{/if}}
+							<sum1:IDType>{{ this.facturaExpedida.contraparte.idOtro.idType }}</sum1:IDType>
+							<sum1:ID>{{ this.facturaExpedida.contraparte.idOtro.id }}</sum1:ID>
+						</sum1:IDOtro>
+						{{/ifNot}}
+					</sum1:Contraparte>
+					{{/if}}
+					<sum1:TipoDesglose>
+						<!--You have a CHOICE of the next 2 items at this level-->
+						{{#if this.facturaExpedida.tipoDesglose.desgloseFactura}}
+						<sum1:DesgloseFactura>
+							{{#if this.facturaExpedida.tipoDesglose.desgloseFactura.sujeta}}
+							<!--Optional:-->
+							<sum1:Sujeta>
+								{{#if this.facturaExpedida.tipoDesglose.desgloseFactura.sujeta.exenta}}
+								<!--Optional:-->
+								<sum1:Exenta>
+									{{#if this.facturaExpedida.tipoDesglose.desgloseFactura.sujeta.exenta.causa}}
+									<!--Optional:-->
+									<sum1:CausaExencion>{{ this.facturaExpedida.tipoDesglose.desgloseFactura.sujeta.exenta.causaExencion }}</sum1:CausaExencion>
+									{{/if}}
+									<sum1:BaseImponible>{{ this.facturaExpedida.tipoDesglose.desgloseFactura.sujeta.exenta.baseImponible }}</sum1:BaseImponible>
+								</sum1:Exenta>
+								{{/if}} {{#if this.facturaExpedida.tipoDesglose.desgloseFactura.sujeta.noExenta}}
+								<!--Optional:-->
+								<sum1:NoExenta>
+									<sum1:TipoNoExenta>{{ this.facturaExpedida.tipoDesglose.desgloseFactura.sujeta.noExenta.tipoNoExenta }}</sum1:TipoNoExenta>
+									<sum1:DesgloseIVA>
+										<!--1 to 6 repetitions:-->
+										{{#each this.facturaExpedida.tipoDesglose.desgloseFactura.sujeta.noExenta.desgloseIVA}}
+										<sum1:DetalleIVA>
+											{{#if this.detalleIVA.tipoImpositivo}}
+											<!--Optional:-->
+											<sum1:TipoImpositivo>{{ this.detalleIVA.tipoImpositivo }}</sum1:TipoImpositivo>
+											{{/if}}
+											<sum1:BaseImponible>{{ this.detalleIVA.baseImponible }}</sum1:BaseImponible>
+											{{#if this.detalleIVA.cuotaRepercutida}}
+											<!--Optional:-->
+											<sum1:CuotaRepercutida>{{ this.detalleIVA.cuotaRepercutida }}</sum1:CuotaRepercutida>
+											{{/if}} {{#if this.detalleIVA.tipoRecargoEquivalencia}}
+											<!--Optional:-->
+											<sum1:TipoRecargoEquivalencia>{{ this.detalleIVA.tipoRecargoEquivalencia }}</sum1:TipoRecargoEquivalencia>
+											{{/if}} {{#if this.detalleIVA.cuotaRecargoEquivalencia}}
+											<!--Optional:-->
+											<sum1:CuotaRecargoEquivalencia>{{ this.detalleIVA.cuotaRecargoEquivalencia }}</sum1:CuotaRecargoEquivalencia>
+											{{/if}}
+										</sum1:DetalleIVA>
+										{{/each}}
+									</sum1:DesgloseIVA>
+								</sum1:NoExenta>
+								{{/if}}
+							</sum1:Sujeta>
+							{{/if}} {{#if this.facturaExpedida.tipoDesglose.desgloseFactura.noSujeta}}
+							<!--Optional:-->
+							<sum1:NoSujeta>
+								{{#if this.facturaExpedida.tipoDesglose.desgloseFactura.noSujeta.importePorArticulos7_14_Otros}}
+								<!--Optional:-->
+								<sum1:ImportePorArticulos7_14_Otros>{{ this.facturaExpedida.tipoDesglose.desgloseFactura.noSujeta.importePorArticulos7_14_Otros }}</sum1:ImportePorArticulos7_14_Otros>
+								{{/if}} {{#if this.facturaExpedida.tipoDesglose.desgloseFactura.noSujeta.importeTAIReglasLocalizacion}}
+								<!--Optional:-->
+								<sum1:ImporteTAIReglasLocalizacion>{{ this.facturaExpedida.tipoDesglose.desgloseFactura.noSujeta.importeTAIReglasLocalizacion }}</sum1:ImporteTAIReglasLocalizacion>
+								{{/if}}
+							</sum1:NoSujeta>
+							{{/if}}
+						</sum1:DesgloseFactura>
+						{{/if}} {{#ifNot this.facturaExpedida.tipoDesglose.desgloseFactura}}
+						<sum1:DesgloseTipoOperacion>
+							{{#if this.facturaExpedida.tipoDesglose.desgloseTipoOperacion.prestacionServicios}}
+							<!--Optional:-->
+							<sum1:PrestacionServicios>
+								{{#if this.facturaExpedida.tipoDesglose.desgloseTipoOperacion.prestacionServicios.sujeta}}
+								<!--Optional:-->
+								<sum1:Sujeta>
+									{{#if this.facturaExpedida.tipoDesglose.desgloseTipoOperacion.prestacionServicios.sujeta.exenta}}
+									<!--Optional:-->
+									<sum1:Exenta>
+										{{#if this.facturaExpedida.tipoDesglose.desgloseTipoOperacion.prestacionServicios.sujeta.exenta.causaExencion}}
+										<!--Optional:-->
+										<sum1:CausaExencion>{{ this.facturaExpedida.tipoDesglose.desgloseTipoOperacion.prestacionServicios.sujeta.exenta.causaExencion }}</sum1:CausaExencion>
+										{{/if}}
+										<sum1:BaseImponible>{{ this.facturaExpedida.tipoDesglose.desgloseTipoOperacion.prestacionServicios.sujeta.exenta.baseImponible }}</sum1:BaseImponible>
+									</sum1:Exenta>
+									{{/if}} {{#if this.facturaExpedida.tipoDesglose.desgloseTipoOperacion.prestacionServicios.sujeta.noExenta}}
+									<!--Optional:-->
+									<sum1:NoExenta>
+										<sum1:TipoNoExenta>{{ this.facturaExpedida.tipoDesglose.desgloseTipoOperacion.prestacionServicios.sujeta.noExenta.tipoNoExenta }}</sum1:TipoNoExenta>
+										<sum1:DesgloseIVA>
+											<!--1 to 6 repetitions:-->
+											{{#each this.facturaExpedida.tipoDesglose.desgloseTipoOperacion.prestacionServicios.sujeta.noExenta.desgloseIVA}}
+											<sum1:DetalleIVA>
+												{{#if this.detalleIVA.tipoImpositivo}}
+												<!--Optional:-->
+												<sum1:TipoImpositivo>{{ this.detalleIVA.tipoImpositivo }}</sum1:TipoImpositivo>
+												{{/if}}
+												<sum1:BaseImponible>{{ this.detalleIVA.baseImponible }}</sum1:BaseImponible>
+												{{#if this.detalleIVA.cuotaRepercutida}}
+												<!--Optional:-->
+												<sum1:CuotaRepercutida>{{ this.detalleIVA.cuotaRepercutida }}</sum1:CuotaRepercutida>
+												{{/if}}
+											</sum1:DetalleIVA>
+											{{/each}}
+										</sum1:DesgloseIVA>
+									</sum1:NoExenta>
+									{{/if}}
+								</sum1:Sujeta>
+								{{/if}} {{#if this.facturaExpedida.tipoDesglose.desgloseTipoOperacion.prestacionServicios.noSujeta}}
+								<!--Optional:-->
+								<sum1:NoSujeta>
+									{{#if this.facturaExpedida.tipoDesglose.desgloseTipoOperacion.prestacionServicios.noSujeta.importePorArticulos7_14_Otros}}
+									<!--Optional:-->
+									<sum1:ImportePorArticulos7_14_Otros>{{ this.facturaExpedida.tipoDesglose.desgloseTipoOperacion.prestacionServicios.noSujeta.importePorArticulos7_14_Otros }}</sum1:ImportePorArticulos7_14_Otros>
+									{{/if}} {{#if this.facturaExpedida.tipoDesglose.desgloseTipoOperacion.prestacionServicios.noSujeta.importeTAIReglasLocalizacion}}
+									<!--Optional:-->
+									<sum1:ImporteTAIReglasLocalizacion>{{ this.facturaExpedida.tipoDesglose.desgloseTipoOperacion.prestacionServicios.noSujeta.importeTAIReglasLocalizacion }}</sum1:ImporteTAIReglasLocalizacion>
+									{{/if}}
+								</sum1:NoSujeta>
+								{{/if}}
+							</sum1:PrestacionServicios>
+							{{/if}} {{#if this.facturaExpedida.tipoDesglose.desgloseTipoOperacion.entrega}}
+							<!--Optional:-->
+							<sum1:Entrega>
+								{{#if this.facturaExpedida.tipoDesglose.desgloseTipoOperacion.entrega.sujeta}}
+								<!--Optional:-->
+								<sum1:Sujeta>
+									{{#if this.facturaExpedida.tipoDesglose.desgloseTipoOperacion.entrega.sujeta.exenta}}
+									<!--Optional:-->
+									<sum1:Exenta>
+										{{#if this.facturaExpedida.tipoDesglose.desgloseTipoOperacion.entrega.sujeta.exenta.causa}}
+										<!--Optional:-->
+										<sum1:CausaExencion>{{ this.facturaExpedida.tipoDesglose.desgloseTipoOperacion.entrega.sujeta.exenta.causaExencion }}</sum1:CausaExencion>
+										{{/if}}
+										<sum1:BaseImponible>{{ this.facturaExpedida.tipoDesglose.desgloseTipoOperacion.entrega.sujeta.exenta.baseImponible }}</sum1:BaseImponible>
+									</sum1:Exenta>
+									{{/if}} {{#if this.facturaExpedida.tipoDesglose.desgloseTipoOperacion.entrega.sujeta.noExenta}}
+									<!--Optional:-->
+									<sum1:NoExenta>
+										<sum1:TipoNoExenta>{{ this.facturaExpedida.tipoDesglose.desgloseTipoOperacion.entrega.sujeta.noExenta.tipoNoExenta }}</sum1:TipoNoExenta>
+										<sum1:DesgloseIVA>
+											<!--1 to 6 repetitions:-->
+											{{#each this.facturaExpedida.tipoDesglose.desgloseTipoOperacion.entrega.sujeta.noExenta.desgloseIVA}}
+											<sum1:DetalleIVA>
+												{{#if this.detalleIVA.tipoImpositivo}}
+												<!--Optional:-->
+												<sum1:TipoImpositivo>{{ this.detalleIVA.tipoImpositivo }}</sum1:TipoImpositivo>
+												{{/if}}
+												<sum1:BaseImponible>{{ this.detalleIVA.baseImponible }}</sum1:BaseImponible>
+												{{#if this.detalleIVA.cuotaRepercutida}}
+												<!--Optional:-->
+												<sum1:CuotaRepercutida>{{ this.detalleIVA.cuotaRepercutida }}</sum1:CuotaRepercutida>
+												{{/if}} {{#if this.detalleIVA.tipoRecargoEquivalencia}}
+												<!--Optional:-->
+												<sum1:TipoRecargoEquivalencia>{{ this.detalleIVA.tipoRecargo }}</sum1:TipoRecargoEquivalencia>
+												{{/if}} {{#if this.detalleIVA.cotaRecargoEquivalencia}}
+												<!--Optional:-->
+												<sum1:CuotaRecargoEquivalencia>{{ this.detalleIVA.cuotaRecargoEquivalencia }}</sum1:CuotaRecargoEquivalencia>
+												{{/if}}
+											</sum1:DetalleIVA>
+											{{/each}}
+										</sum1:DesgloseIVA>
+									</sum1:NoExenta>
+									{{/if}}
+								</sum1:Sujeta>
+								{{/if}} {{#if this.facturaExpedida.tipoDesglose.desgloseTipoOperacion.entrega.noSujeta}}
+								<!--Optional:-->
+								<sum1:NoSujeta>
+									{{#if this.facturaExpedida.tipoDesglose.desgloseTipoOperacion.entrega.noSujeta.importePorArticulos7_14_Otros}}
+									<!--Optional:-->
+									<sum1:ImportePorArticulos7_14_Otros>{{ this.facturaExpedida.tipoDesglose.desgloseTipoOperacion.entrega.noSujeta.importePorArticulos7_14_Otros }}</sum1:ImportePorArticulos7_14_Otros>
+									{{/if}} {{#if this.facturaExpedida.tipoDesglose.desgloseTipoOperacion.entrega.noSujeta.importeTAIReglasLocalizacion}}
+									<!--Optional:-->
+									<sum1:ImporteTAIReglasLocalizacion>{{ this.facturaExpedida.tipoDesglose.desgloseTipoOperacion.entrega.noSujeta.importeTAIReglasLocalizacion }}</sum1:ImporteTAIReglasLocalizacion>
+									{{/if}}
+								</sum1:NoSujeta>
+								{{/if}}
+							</sum1:Entrega>
+							{{/if}}
+						</sum1:DesgloseTipoOperacion>
+						{{/ifNot}}
+					</sum1:TipoDesglose>
+				</sum:FacturaExpedida>
+			</sum:RegistroLRFacturasEmitidas>
+			{{/each}}
+		</sum:SuministroLRFacturasEmitidas>
+	</soapenv:Body>
+</soapenv:Envelope>

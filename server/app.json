@@ -1,0 +1,13 @@
+{
+    "name": "sii-api",
+    "script": "server.js",
+    "cwd": "/var/www/node/sii-api/server",
+    "node_args": [],
+    "env": {
+        "PORT": 5002,
+        "HOSTNAME": "0.0.0.0",
+        "NODE_ENV": "development"
+    },
+    "error_file": "/var/www/node/logs/sii-api/sii_api_err.log",
+    "out_file": "/var/www/node/logs/sii-api/sii_api_out.log"
+}

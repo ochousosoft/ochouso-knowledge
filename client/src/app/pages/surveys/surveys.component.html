@@ -1,0 +1,79 @@
+<main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+  <h1>{{survey_type=='survey'?'Enquisas':'Satisfacción'}}</h1>
+
+  <div class="row" style="padding: 10px;"> 
+    <div class = "form-group col-sm-3">
+      <label *ngIf="Auth.isAuthorized('admin')">Concello</label>
+      <select *ngIf="Auth.isAuthorized('admin')" id="my-select"  [(ngModel)]="filter.municipality" class="form-control btn-answer"
+              (change)="onMunicipalityChange($event)">
+              <option *ngFor="let option of municipalities" [ngValue]="option.id">
+                {{option.name}}
+              </option>
+      </select>
+    </div>
+    <div class = "form-group col-sm-3">
+      <label>Orixe</label>
+      <select id="my-select"  [(ngModel)]="filter.source" class="form-control btn-answer"
+              (change)="onSourceChange($event)">
+              <option value=""></option>
+              <option value="web">Web</option>
+              <option value="app">App</option>
+      </select>
+    </div>
+    <div class = "form-group col-sm-3">
+      <!-- <label>Tipo</label>
+      <select id="my-select"  [(ngModel)]="filter.type" class="form-control btn-answer"
+              (change)="onTypeChange($event)">
+              <option value=""></option>
+              <option value="only-survey">Enquisa</option>
+              <option value="satisfaction">Satisfacción</option>
+              <option value="survey">Mixta</option>
+      </select> -->
+    </div>
+    <div class="col-sm-3">  
+      <button  [routerLink]="['/new-survey', survey_type]" type="button" [ngClass]="{'btn-info': survey_type =='satisfaction','btn-success': survey_type != 'satisfaction'}" class="btn pull-right">
+        <i class="fa fa-plus" aria-hidden="true"></i> {{survey_type=='satisfaction'?'E. Satisfacción': 'Enquisa'}}
+      </button>
+    </div> 
+  </div> 
+  <app-spinner [isRunning]="isRequesting"></app-spinner>
+  <table *ngIf="!isRequesting" class="table table-striped">
+    <thead>
+      <tr>
+        <th>Concello</th>
+        <th>Oficina</th>
+        <th>Usuario</th>
+        <th>Orixe</th>
+        <th>Tipo</th>
+        <th>Hora Enquisa</th>
+        <!-- <th>Hora Sincronización</th> -->
+        <th>Accións</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let survey of surveys">
+        <td>{{survey.municipality_name}}</td>
+        <td>{{survey.office_name}}</td>
+        <td>{{survey.user_name}}</td>
+        <td>{{survey.source}}</td>
+        <td>{{survey.survey_type}}</td>
+        <td>{{survey.survey_date}}</td>
+        <!-- <td>{{survey.creation_date}}</td> -->
+        <td>
+          <a [routerLink]="['/survey-detail', survey.id, survey_type]"  href="#" class="btn-sm btn-warning">
+            <i class="fa fa-eye"></i>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+    &nbsp;
+  </p>
+  <p>
+    &nbsp;
+  </p>
+  <p>
+    &nbsp;
+  </p>
+</main>

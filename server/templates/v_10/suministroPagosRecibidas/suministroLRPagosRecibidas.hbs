@@ -1,0 +1,58 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sum="https://www2.agenciatributaria.gob.es/static_files/common/internet/dep/aplicaciones/es/aeat/ssii/fact/ws/SuministroLR.xsd"
+ xmlns:sum1="https://www2.agenciatributaria.gob.es/static_files/common/internet/dep/aplicaciones/es/aeat/ssii/fact/ws/SuministroInformacion.xsd">
+	<soapenv:Header/>
+	<soapenv:Body>
+		<sum:SuministroLRPagosRecibidas>
+			<sum1:Cabecera>
+				<sum1:IDVersionSii>{{ cabecera.idVersion }}</sum1:IDVersionSii>
+				<sum1:Titular>
+					<sum1:NombreRazon>{{ cabecera.titular.nombreRazon }}</sum1:NombreRazon>
+					{{#if cabecera.titular.nifRepresentante}}
+					<!--Optional:-->
+					<sum1:NIFRepresentante>{{ cabecera.titular.nifRepresentante }}</sum1:NIFRepresentante>
+					{{/if}}
+					<sum1:NIF>{{ cabecera.titular.nif }}</sum1:NIF>
+				</sum1:Titular>
+			</sum1:Cabecera>
+			<!--1 to 10000 repetitions:-->
+			{{#each registroLRPagos}}
+			<sum:RegistroLRPagos>
+				<sum:IDFactura>
+					<sum1:IDEmisorFactura>
+						<sum1:NombreRazon>{{ this.idFactura.idEmisorFactura.nombreRazon }}</sum1:NombreRazon>
+						<!--You have a CHOICE of the next 2 items at this level-->
+						{{#if this.idFactura.idEmisorFactura.nif}}
+						<sum1:NIF>{{ this.idFactura.idEmisorFactura.nif }}</sum1:NIF>
+						{{/if}}{{#ifNot this.idFactura.idEmisorFactura.nif}}
+						<sum1:IDOtro>
+							{{#if this.idFactura.idEmisorFactura.idOtro.codigoPais}}
+							<!--Optional:-->
+							<sum1:CodigoPais>{{ this.idFactura.idEmisorFactura.idOtro.codigoPais }}</sum1:CodigoPais>
+							{{/if}}
+							<sum1:IDType>{{ this.idFactura.idEmisorFactura.idOtro.idType }}</sum1:IDType>
+							<sum1:ID>{{ this.idFactura.idEmisorFactura.idOtro.id }}</sum1:ID>
+						</sum1:IDOtro>
+						{{/ifNot}}
+					</sum1:IDEmisorFactura>
+					<sum1:NumSerieFacturaEmisor>{{ this.idFactura.numSerieFacturaEmisor }}</sum1:NumSerieFacturaEmisor>
+					<sum1:FechaExpedicionFacturaEmisor>{{ this.idFactura.fechaExpedicionFacturaEmisor }}</sum1:FechaExpedicionFacturaEmisor>
+				</sum:IDFactura>
+				<sum:Pagos>
+					<!--1 or more repetitions:-->
+					{{#each this.pagos}}
+					<sum1:Pago>
+						<sum1:Fecha>{{ this.fecha }}</sum1:Fecha>
+						<sum1:Importe>{{ this.importe }}</sum1:Importe>
+						<sum1:Medio>{{ this.medio }}</sum1:Medio>
+						{{#if this.cuenta_O_Medio}}
+						<!--Optional:-->
+						<sum1:Cuenta_O_Medio>{{ this.cuenta_O_Medio }}</sum1:Cuenta_O_Medio>
+						{{/if}}
+					</sum1:Pago>
+					{{/each}}
+				</sum:Pagos>
+			</sum:RegistroLRPagos>
+			{{/each}}
+		</sum:SuministroLRPagosRecibidas>
+	</soapenv:Body>
+</soapenv:Envelope>

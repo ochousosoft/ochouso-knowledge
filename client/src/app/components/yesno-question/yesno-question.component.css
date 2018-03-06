@@ -1,0 +1,33 @@
+.simple-question-content{
+    text-align: center;
+    margin: 5px 15px 5px 15px;
+}
+
+.question-active{
+  border: 2px solid green !important;
+}
+
+.question-inactive{
+
+}
+
+.btn-active{
+  border: 2px green solid !important;
+  color: green solid !important;
+  background: lightgreen !important;
+  color: green;
+
+}
+
+.card-text{
+  font-weight: bold;
+}
+
+.card-block{
+  padding: 5px;
+}
+
+.btn-answer:focus{
+      background-color: #13658b;
+      color: white;
+}

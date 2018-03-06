@@ -1,0 +1,45 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sum="https://www2.agenciatributaria.gob.es/static_files/common/internet/dep/aplicaciones/es/aeat/ssii/fact/ws/SuministroLR.xsd"
+ xmlns:sum1="https://www2.agenciatributaria.gob.es/static_files/common/internet/dep/aplicaciones/es/aeat/ssii/fact/ws/SuministroInformacion.xsd">
+	<soapenv:Header/>
+	<soapenv:Body>
+		<sum:SuministroLRCobrosEmitidas>
+			<sum1:Cabecera>
+				<sum1:IDVersionSii>{{ cabecera.idVersion }}</sum1:IDVersionSii>
+				<sum1:Titular>
+					<sum1:NombreRazon>{{ cabecera.titular.nombreRazon }}</sum1:NombreRazon>
+					{{#if cabecera.titular.nifRepresentante}}
+					<!--Optional:-->
+					<sum1:NIFRepresentante>{{ cabecera.titular.nifRepresentante }}</sum1:NIFRepresentante>
+					{{/if}}
+					<sum1:NIF>{{ cabecera.titular.nif }}</sum1:NIF>
+				</sum1:Titular>
+			</sum1:Cabecera>
+			{{#each registroLRCobros}}
+			<!--1 to 10000 repetitions:-->
+			<sum:RegistroLRCobros>
+				<sum:IDFactura>
+					<sum1:IDEmisorFactura>
+						<sum1:NIF>{{ this.idFactura.idEmisorFactura.nif }}</sum1:NIF>
+					</sum1:IDEmisorFactura>
+					<sum1:NumSerieFacturaEmisor>{{ this.idFactura.numSerieFacturaEmisor }}</sum1:NumSerieFacturaEmisor>
+					<sum1:FechaExpedicionFacturaEmisor>{{ this.idFactura.fechaExpedicionFacturaEmisor }}</sum1:FechaExpedicionFacturaEmisor>
+				</sum:IDFactura>
+				<sum:Cobros>
+					{{#each cobros}}
+					<!--1 or more repetitions:-->
+					<sum1:Cobro>
+						<sum1:Fecha>{{ this.fecha }}</sum1:Fecha>
+						<sum1:Importe>{{ this.importe }}</sum1:Importe>
+						<sum1:Medio>{{ this.medio }}</sum1:Medio>
+						{{#if this.cuenta_O_Medio}}
+						<!--Optional:-->
+						<sum1:Cuenta_O_Medio>{{ this.cuenta_O_Medio }}</sum1:Cuenta_O_Medio>
+						{{/if}}
+					</sum1:Cobro>
+					{{/each}}
+				</sum:Cobros>
+			</sum:RegistroLRCobros>
+			{{/each}}
+		</sum:SuministroLRCobrosEmitidas>
+	</soapenv:Body>
+</soapenv:Envelope>

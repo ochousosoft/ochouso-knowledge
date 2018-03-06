@@ -1,0 +1,18 @@
+<div class="card simple-question-content" [ngClass]="{'question-active': currentIndex == index, 'question-inactive':currentIndex != index}">
+ <div class="card-block">
+   <span class="question-number">{{index+1}}</span>
+   <p class="card-text">{{question.question['gl']}}</p>
+   <div class="row">
+    <div class = "form-group col-sm-12">
+      <!-- <input #txtNumber class="form-input" /> -->
+      <label></label>
+      <select id="my-select" #txtNumber *ngIf="survey && question"  [(ngModel)]="survey[question.field]" (change)="onSelectChange($event)" class="form-control btn-answer" 
+               [ngClass]="survey && question && {'input-active': survey[question['field']], 'input-inactive':!survey[ question['field']]}" >
+              <option *ngFor="let option of options" [ngValue]="option.id">
+                {{option.name_gl}}
+              </option>
+      </select>
+    </div>
+   </div>
+ </div>
+</div>

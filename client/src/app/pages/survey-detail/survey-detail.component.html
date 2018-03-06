@@ -1,0 +1,191 @@
+<main style="height:100%;" class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+  <div class="row" style="padding-bottom: 10px;"> 
+    <div class="col-md-6">
+      <button #btnBackSatisfaction [routerLink]="['/surveys', survey_type]" type="button" class="btn btn-warning btn-sm">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar
+      </button>
+    </div> 
+    <div class=" col-md-6">  
+
+    </div> 
+  </div>
+  <!-- <h2>Detalle de Enquisa</h2> -->
+  <div *ngIf="survey && survey.survey_date" class="survey-detail-header row">
+    <div class="col-md-4">
+      Data: <b>{{survey.survey_date}}</b>   
+    </div>
+    <div class="col-md-4">
+      <span *ngIf="survey.municipality_name">Concello: <b>{{survey.municipality_name}}</b> , Oficina: <b> {{survey.office_name}}</b></span>
+    </div>
+    <div class="col-md-4">
+      <span *ngIf="survey.municipality_name">Usuario: <b>{{survey.user_name}}</b></span> 
+    </div>
+  </div>
+
+  <!-- <ul class="nav nav-tabs">	
+    <li class="nav-item" *ngIf="!survey.survey_type || survey.survey_type == 'survey' || survey.survey_type == 'only-survey'">
+      <a class="nav-link" [ngClass]="{active:selectedTab==0}" (click)="selectTab(0)">Enquisa</a>
+    </li>
+
+    <li class="nav-item" *ngIf="survey.survey_type && (survey.survey_type == 'survey' || survey.survey_type == 'satisfaction')">
+      <a class="nav-link" [ngClass]="{active:selectedTab==1}" (click)="selectTab(1)">Satisfacción</a>
+    </li>
+  </ul> -->
+
+  <div #topMark ></div>
+  <!-- Tab Enquisa normal -->
+  <!-- <div *ngIf="selectedTab == 0"> -->
+  <div *ngIf="survey_type == 'survey' && !do_satisfaction">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <!-- Idioma -->
+          <app-simple-question [numCols]="3" [survey]="survey" #question [index]="0" [question]="questions[0]" [currentIndex]="currentIndex"></app-simple-question>
+        </div>
+
+        <div #questionMark ></div>
+
+        <div class="col-sm-12 col-md-12">
+          <!-- Discapacidad -->
+          <app-yesno-question [survey]="survey" #question [index]="1" [question]="questions[1]" [currentIndex]="currentIndex"></app-yesno-question>
+        </div>
+
+        <div #questionMark ></div>
+
+        <div class="col-sm-12 col-md-12">
+          <!-- Orixe -->
+          <app-select-question [survey]="survey" #question [index]="2" [question]="questions[2]" [currentIndex]="currentIndex"></app-select-question>
+        </div>
+
+        <div #questionMark ></div>
+        
+        <div class="col-sm-12 col-md-12">
+          <!-- Orixe CP -->
+          <app-numeric-question [survey]="survey" #question [index]="3" [question]="questions[3]" [currentIndex]="currentIndex"></app-numeric-question>
+        </div>
+
+        <div #questionMark ></div>
+
+        <div class="col-sm-12 col-md-12">
+          <!-- 1ª Vez -->
+          <app-yesno-question [survey]="survey" #question  [index]="4" [question]="questions[4]" [currentIndex]="currentIndex"></app-yesno-question>
+        </div>
+
+        <div #questionMark ></div>
+
+        <div class="col-sm-12 col-md-12">
+          <!-- Tipo Grupo -->
+          <app-simple-question  [numCols]="4" [survey]="survey" #question [index]="5" [question]="questions[5]" [currentIndex]="currentIndex"></app-simple-question>
+        </div>
+
+        <div #questionMark ></div>
+
+        <div class="col-sm-12 col-md-12">
+          <!-- Tamaño Grupo -->
+          <app-numeric-question [survey]="survey" #question [index]="6" [question]="questions[6]" [currentIndex]="currentIndex"></app-numeric-question>
+        </div>
+
+        <div #questionMark ></div>
+
+        <div class="col-sm-12 col-md-12">
+          <!-- Rango Idades -->
+          <app-numeric-multiple-question [survey]="survey" #question [index]="7" [question]="questions[7]" [currentIndex]="currentIndex"></app-numeric-multiple-question>
+        </div>
+
+        <div #questionMark ></div>
+
+        <div class="col-sm-12 col-md-12">
+          <!-- Duración -->
+          <app-numeric-question [survey]="survey" #question [index]="8" [question]="questions[8]" [currentIndex]="currentIndex"></app-numeric-question>
+        </div>
+
+        <div #questionMark ></div>
+
+        <div class="col-sm-12 col-md-12">
+          <!-- Motivación -->
+          <app-checkboxes-question [survey]="survey" #question  [index]="9" [question]="questions[9]" [currentIndex]="currentIndex"></app-checkboxes-question>
+        </div>
+
+        <div #questionMark ></div>
+
+        <div class="col-sm-12 col-md-12">
+          <!-- Pernocta -->
+          <app-yesno-question [survey]="survey" #question  [index]="10" [question]="questions[10]" [currentIndex]="currentIndex"></app-yesno-question>
+        </div>
+
+        <div #questionMark ></div>
+
+        <div class="col-sm-12 col-md-12">
+          <!-- Alojamiento -->
+          <app-checkboxes-question [survey]="survey" #question [index]="11" [question]="questions[11]" [currentIndex]="currentIndex"></app-checkboxes-question>
+        </div>
+
+        <div #questionMark ></div>
+
+        <div class="col-sm-12 col-md-12">
+          <!-- Motivo Consulta -->
+          <app-checkboxes-question [survey]="survey" #question [index]="12" [question]="questions[12]" [currentIndex]="currentIndex"></app-checkboxes-question>
+        </div>
+
+        <div #questionMark ></div>
+
+        <div class="col-sm-12 col-md-12">
+          <!-- Medio Transporte -->
+          <app-checkboxes-question [survey]="survey" #question [index]="13" [question]="questions[13]" [currentIndex]="currentIndex"></app-checkboxes-question>
+        </div>
+        
+      </div>
+
+      <div style="margin: 15px; padding: 15px;" *ngIf="surveyErrors" [innerHTML]="surveyErrors" class="alert alert-danger" role="alert">
+      </div>
+
+      <div #bottomMark ></div>
+
+      <div class="row" style="padding: 25px 50px 100px 50px;text-align: center;"> 
+        <div class="col-sm-12 col-md-4">
+          <button *ngIf="survey && survey.source!='app'" #btnBackSurvey [routerLink]="['/surveys', survey_type]" type="button" class="btn btn-warning btn-lg">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar
+          </button>
+        </div> 
+        <div class="col-sm-12 col-md-4">  
+          <button *ngIf="survey && survey.source!='app'" id="btn-save-survey" #btnSaveSurvey (click)="saveSurvey(false, questions)" type="button" class="btn btn-primary btn-lg">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            Gardar
+          </button>
+        </div> 
+        <div class="col-sm-12 col-md-4">  
+          <button *ngIf="survey && survey.source!='app'" id="btn-save-survey" #btnSaveSurvey (click)="saveSurvey(true, questions)" type="button" class="btn btn-success btn-lg">
+            Satisfacción
+            <i class="fa fa-step-forward" aria-hidden="true"></i>
+          </button>
+        </div> 
+      </div> 
+  </div> 
+
+  <!-- Tab Enquisa satisfacción -->
+  <!-- <div *ngIf="selectedTab == 1"> -->
+    <div *ngIf="survey_type == 'satisfaction' || do_satisfaction">
+    <div *ngFor="let satisfactionQuestion of satisfactionQuestions;let i = index;">
+      <div #satisfactionQuestionMark ></div>
+      <app-satisfaction-question #satisfactionQestion [question]=satisfactionQuestion [survey]="survey" [index]="i" [currentIndex]="currentIndex"></app-satisfaction-question>
+    </div>
+
+    <div style="margin: 15px; padding: 15px;" *ngIf="surveyErrors" [innerHTML]="surveyErrors" class="alert alert-danger" role="alert">
+    </div>
+
+    <div #bottomMarkSatisfaction ></div>
+
+      <div class="row" style="padding: 25px 50px 100px 50px;text-align: center;"> 
+        <div class="col-sm-12 col-md-6">
+          <button *ngIf="survey && survey.source!='app'" #btnBackSatisfaction [routerLink]="['/surveys']" type="button" class="btn btn-warning btn-lg">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar
+          </button>
+        </div> 
+        <div class="col-sm-12 col-md-6">  
+          <button *ngIf="survey && survey.source!='app'" #btnSaveSatisfaction (click)="saveSurvey(false, satisfactionQuestions)" type="button" class="btn btn-primary btn-lg">
+            Gardar
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+          </button>
+        </div> 
+      </div>
+  </div>
+</main>

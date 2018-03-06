@@ -1,0 +1,33 @@
+<nav class="col-sm-3 col-md-2 hidden-xs-down sidebar">
+    <ul class="nav nav-pills flex-column">
+        <!-- <li class="nav-item">
+            <a [routerLink]="['dashboard']" class="nav-link active" href="#">Resumo <span class="sr-only">(current)</span></a>
+        </li> -->
+        <li class="nav-item">
+            <a [routerLink]="['dashboard']" (click)="activeItem = 0" [ngClass]="{'active-menu-item':activeItem == 0}" class="nav-link" href="#">
+                <i class="fa fa-pie-chart fa-lg" aria-hidden="true"></i>
+                &nbsp;&nbsp;Resultados <span class="sr-only">(current)</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a [routerLink]="['surveys', 'survey']" (click)="activeItem = 1" [ngClass]="{'active-menu-item':activeItem == 1}" class="nav-link">
+                <i class="fa fa-file-text-o fa-lg" aria-hidden="true"></i>
+                &nbsp;&nbsp;Enquisas <span class="sr-only">(current)</span>
+            </a>
+            <a [routerLink]="['surveys', 'satisfaction']" (click)="activeItem = 2" [ngClass]="{'active-menu-item':activeItem == 2}" class="nav-link">
+                <i class="fa fa-smile-o fa-lg" aria-hidden="true"></i>
+                &nbsp;&nbsp;Satisfacción <span class="sr-only">(current)</span>
+            </a>
+        </li>
+        <!-- <li class="nav-item">
+            <a class="nav-link" href="#">Informes</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Analytics</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Export</a>
+        </li> -->
+    </ul>
+
+</nav>
