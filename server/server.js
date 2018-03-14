@@ -43,7 +43,7 @@ if (mode == 'production') {
     app.use(opbeat.middleware.express());
 }
 
-http.createServer(app).listen(env[mode].port, function() {
+http.createServer(app).listen(env[mode].port, function () {
     logger.info('*************************************************');
     logger.info('*                                               *');
     logger.info('*                                               *');

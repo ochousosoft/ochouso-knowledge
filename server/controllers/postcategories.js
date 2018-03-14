@@ -4,7 +4,7 @@
  */
 var util = require('../nutjs/util/util');
 var DataModel = require('../nutjs/util/datamodel');
-var model = require('../models/Post');
+var model = require('../models/PostCategory');
 var adapter = util.getAdapter(model);
 
 var authorization = require('../nutjs/security/authorization');
@@ -20,7 +20,7 @@ var jwt = require('jsonwebtoken');
 
 exports.find = {};
 exports.find.verb = 'get';
-exports.find.path = '/server/api/posts';
+exports.find.path = '/server/api/postcategories';
 exports.find.method = function (req, res) {
     //var authData = authorization.decodeAuthToken(req, res);
     var reqParams = util.extractReqParams(req);
@@ -39,7 +39,7 @@ exports.find.method = function (req, res) {
 
 exports.findOne = {};
 exports.findOne.verb = 'get';
-exports.findOne.path = '/server/api/post';
+exports.findOne.path = '/server/api/postcategory';
 exports.findOne.method = function (req, res) {
     //var authData = authorization.decodeAuthToken(req, res);
     var reqParams = util.extractReqParams(req);
@@ -60,16 +60,16 @@ exports.findOne.method = function (req, res) {
 
 exports.save = {};
 exports.save.verb = 'post';
-exports.save.path = '/server/api/posts';
+exports.save.path = '/server/api/postcategories';
 exports.save.method = function (req, res) {
     //var authData = authorization.decodeAuthToken(req, res);
     //var user_id = authData.data.id;
-
     var reqBodyParams = req.body;
     if(!util.isObject(reqBodyParams)){
         reqBodyParams = JSON.parse(reqBodyParams);
         console.log('--------------->' + reqBodyParams)
     }
+
     var parameters = adapter.validateSave(reqBodyParams, model);
     adapter.transaction(function (client) {
         var datamodel = new DataModel();
@@ -95,7 +95,7 @@ exports.save.method = function (req, res) {
 
 exports.saveOne = {};
 exports.saveOne.verb = 'post';
-exports.saveOne.path = '/server/api/post';
+exports.saveOne.path = '/server/api/postcategory';
 exports.saveOne.method = function (req, res) {
     //var authData = authorization.decodeAuthToken(req, res);
     //var user_id = authData.data.id;
@@ -118,7 +118,7 @@ exports.saveOne.method = function (req, res) {
 
 exports.delete = {};
 exports.delete.verb = 'delete';
-exports.delete.path = '/server/api/post';
+exports.delete.path = '/server/api/postcategory';
 exports.delete.method = function (req, res) {
     //var authData = authorization.decodeAuthToken(req, res);
     //var user_id = authData.data.id;

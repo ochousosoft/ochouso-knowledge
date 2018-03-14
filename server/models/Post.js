@@ -19,6 +19,9 @@ var model = {
 			countColumn:'id',
 			//TODO accept join in model to avoid creating new views
 			join : '',
+			oneToN : [
+				{modelN  : 'PostCategory', column : 'id', columnN  : 'post_id', find:{'column':'post_categories','projection':'default'}}
+			],
 		}
     }
 };
